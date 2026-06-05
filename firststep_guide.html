@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIRST STEP 課題ガイド</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+  :root {
+    --ink: #1a1814;
+    --ink-mid: #4a4740;
+    --ink-light: #8a8780;
+    --paper: #f7f5f0;
+    --paper-warm: #ede9e0;
+    --accent: #c0392b;
+    --accent-soft: #f0e8e6;
+    --orange: #d4500a;
+    --orange-soft: #fdeee6;
+    --teal: #0f6e56;
+    --teal-soft: #e1f5ee;
+    --purple: #534ab7;
+    --purple-soft: #eeedfe;
+    --border: #d4d0c8;
+    --serif: 'Noto Serif JP', serif;
+    --sans: 'Noto Sans JP', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.8; }
+
+  /* ── ヘッダー ── */
+  header {
+    background: var(--ink); color: var(--paper);
+    padding: 36px 40px 28px; position: relative; overflow: hidden;
+  }
+  header::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border: 2px solid rgba(255,255,255,0.08); border-radius: 50%;
+  }
+  header::after {
+    content: ''; position: absolute; bottom: -60px; right: 40px;
+    width: 120px; height: 120px;
+    border: 1px solid rgba(255,255,255,0.05); border-radius: 50%;
+  }
+  .header-eyebrow { font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 10px; }
+  header h1 { font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1.3; margin-bottom: 6px; }
+  .header-deadline {
+    display: inline-block; margin-top: 10px;
+    background: var(--orange); color: white;
+    font-size: 13px; font-weight: 700; padding: 4px 14px; border-radius: 20px;
+  }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 8px; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 0 20px 60px; }
+  .section { margin-top: 40px; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-light); margin-bottom: 12px;
+  }
+  .section-label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-light); }
+
+  /* ── ミッションバナー ── */
+  .mission-banner {
+    background: var(--orange); color: white;
+    border-radius: 10px; padding: 16px 22px; text-align: center;
+    font-size: 18px; font-weight: 700; margin-top: 28px; letter-spacing: 0.02em;
+  }
+
+  /* ── 要件カード ── */
+  .req-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; margin-bottom: 10px;
+  }
+  .req-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 18px; border-bottom: 1px solid var(--border);
+    background: var(--paper-warm);
+  }
+  .req-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--ink); color: white;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .req-num.orange { background: var(--orange); }
+  .req-title { font-size: 14px; font-weight: 700; }
+  .req-body { padding: 14px 18px; font-size: 13.5px; color: var(--ink-mid); line-height: 1.7; }
+  .req-note {
+    background: var(--orange-soft); border-radius: 6px;
+    padding: 8px 12px; margin-top: 10px;
+    font-size: 13px; color: var(--orange); font-weight: 500; line-height: 1.6;
+  }
+
+  /* ── フェーズカード ── */
+  .phase { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; background: white; }
+  .phase-header { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .phase-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .phase-badge.idea   { background: var(--teal-soft); color: var(--teal); }
+  .phase-badge.proto  { background: var(--orange-soft); color: var(--orange); }
+  .phase-badge.verify { background: var(--purple-soft); color: var(--purple); }
+  .phase-badge.submit { background: #f1efe8; color: var(--ink); }
+  .phase-title { font-size: 15px; font-weight: 700; flex: 1; }
+  .phase-body { padding: 18px 20px; }
+
+  /* ── ゴールボックス ── */
+  .goal-box {
+    background: var(--paper-warm); border-radius: 8px;
+    padding: 12px 16px; font-size: 14px; margin-bottom: 16px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+
+  /* ── ステップリスト ── */
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .steps li:last-child { border-bottom: none; }
+  .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ink); color: white;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-num.teal   { background: var(--teal); }
+  .step-num.orange { background: var(--orange); }
+  .step-num.purple { background: var(--purple); }
+  .step-content { flex: 1; }
+  .step-content strong { font-weight: 700; }
+  .step-content p { font-size: 14px; color: var(--ink-mid); margin-top: 3px; }
+
+  /* ── プロンプト例 ── */
+  .prompt-card {
+    background: var(--paper); border: 1px solid var(--border);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 6px 6px 0; padding: 10px 14px;
+    font-size: 13.5px; line-height: 1.7; margin-bottom: 8px; margin-top: 10px;
+    font-family: var(--serif);
+  }
+  .prompt-card.orange-l { border-left-color: var(--orange); }
+  .prompt-card.purple-l { border-left-color: var(--purple); }
+
+  /* ── ヒント ── */
+  .tips { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .tip { display: flex; gap: 10px; font-size: 13px; color: var(--ink-mid); align-items: flex-start; }
+
+  /* ── 審査員ボックス ── */
+  .judge-box {
+    background: var(--ink); color: white;
+    border-radius: 12px; padding: 20px 22px; margin-top: 20px;
+  }
+  .judge-box .j-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px;
+  }
+  .judge-box .j-title { font-family: var(--serif); font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+  .judge-point { display: flex; gap: 10px; font-size: 14px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); align-items: flex-start; }
+  .judge-point:last-child { border-bottom: none; }
+  .judge-icon { flex-shrink: 0; }
+
+  /* ── 提出ボックス ── */
+  .submit-box { border: 2px solid var(--ink); border-radius: 12px; padding: 20px 22px; margin-top: 20px; }
+  .submit-box h3 { font-family: var(--serif); font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .submit-items { list-style: none; }
+  .submit-items li { display: flex; gap: 10px; font-size: 14px; padding: 7px 0; border-bottom: 1px dashed var(--border); align-items: flex-start; }
+  .submit-items li:last-child { border-bottom: none; }
+  .check-box { width: 16px; height: 16px; border: 1.5px solid var(--ink-light); border-radius: 3px; flex-shrink: 0; margin-top: 2px; }
+
+  /* ── 困ったときカード ── */
+  .help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  @media (max-width: 480px) { .help-grid { grid-template-columns: 1fr; } }
+  .help-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .help-card .q { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 5px; }
+  .help-card .a { font-size: 12.5px; color: var(--ink-mid); line-height: 1.6; }
+
+  footer {
+    margin-top: 48px; border-top: 1px solid var(--border);
+    padding-top: 20px; font-size: 12px; color: var(--ink-light);
+    text-align: center; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container" style="padding-top:0;padding-bottom:0;">
+    <p class="header-eyebrow">Assignment Guide</p>
+    <h1>FIRST STEP</h1>
+    <div class="header-deadline">締切：6/24（水）12:00</div>
+    <p class="header-sub" style="margin-top:12px;">AIをフル活用して、サービスデザイン案とプロトタイプを作る</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ── ミッション ── -->
+  <div class="mission-banner">
+    ラフなサービスデザイン案を "最低3つ" 提示する
+  </div>
+
+  <!-- ── 課題の要件 ── -->
+  <div class="section">
+    <div class="section-label"><span class="dot"></span>満たすべき要件</div>
+
+    <div class="req-card">
+      <div class="req-header">
+        <span class="req-num orange">1</span>
+        <span class="req-title">プロトタイプを実際に作って、価値を検証すること</span>
+      </div>
+      <div class="req-body">
+        アイデアの良し悪しではなく、「実際に作ってみて」価値が生まれそうかを確かめることが目的です。頭の中で考えるだけでなく、手を動かして試してみましょう。
+        <div class="req-note">AIを使ってプロトタイプ制作のスピードを上げること。アイデア出しや壁打ちにAIエージェントを使ってもOK。</div>
+      </div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-header">
+        <span class="req-num orange">2</span>
+        <span class="req-title">GUI制作も念頭に置く（ただし主軸でなくてOK）</span>
+      </div>
+      <div class="req-body">
+        デジタルサービスを提案するならUI画面があると説得力が増します。ただし、メインのアウトプットが空間設計やガジェットの提案になるのはOKです。
+      </div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-header">
+        <span class="req-num orange">3</span>
+        <span class="req-title">提出形式は問わない ── ただし必ずプロトタイプを添えること</span>
+      </div>
+      <div class="req-body">
+        PDFペーパー・HTML・Figmaモックアップなど、どんな形でもOKです。ただし資料だけでなく、必ず動く・見られるプロトタイプをセットで提出してください。
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 講評会について ── -->
+  <div class="section">
+    <div class="section-label"><span class="dot"></span>講評会のロール設定</div>
+    <div class="judge-box">
+      <div class="j-label">Jury Setting</div>
+      <div class="j-title">講師は「予算を出すか判断するえらいヒト」として講評します</div>
+      <div class="judge-point"><span class="judge-icon">💼</span><span>「このサービスに投資する価値があるか」という視点で評価します</span></div>
+      <div class="judge-point"><span class="judge-icon">📊</span><span>「なんとなく良さそう」ではなく、価値が伝わる資料とプロトタイプを用意してください</span></div>
+      <div class="judge-point"><span class="judge-icon">🎯</span><span>このえらそうなヒトが喜んで予算を出してくれそうな資料・モックアップを目指す</span></div>
+    </div>
+  </div>
+
+  <!-- ── ステップ ── -->
+  <div class="section">
+    <div class="section-label"><span class="dot"></span>進め方（AIをフル活用する）</div>
+
+    <!-- STEP 1 -->
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-badge idea">Step 1</span>
+        <span class="phase-title">アイデアを3案以上出す</span>
+      </div>
+      <div class="phase-body">
+        <div class="goal-box">
+          <span>🎯</span>
+          <span>まず量を出す。1案に絞らず、方向性の違う案を最低3つ並行して持つ。AIに大量に出してもらってOK。</span>
+        </div>
+        <ul class="steps">
+          <li>
+            <div class="step-num teal">1</div>
+            <div class="step-content">
+              <strong>授業中のワークで考えたアイデアを起点にする</strong>
+              <p>5W1Hワークや「良い制限」のレクチャーで出てきたアイデアの中から、面白いと思うものを1〜2個選びます。まず自分の言葉でアイデアをメモしてから、次のステップへ。</p>
+              <div class="prompt-card">自分のアイデアをClaude.aiに貼り付けて：<br><br>「私は〇〇というサービスを考えました。（自分のアイデアを説明）<br>これと似た思想・切り口を持ちながら、対象ユーザー・シーン・制限の条件を変えたバリエーションを5案出してください。課題解決ではなく、新しい意味や体験を生み出す方向で考えてください。」</div>
+              <div class="tips" style="margin-top:8px;">
+                <div class="tip"><span>💡</span><span>BeRealやTotのように「制限がサービスの価値になっている」案を意識してバリエーションを選びましょう</span></div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num teal">2</div>
+            <div class="step-content">
+              <strong>気に入った3案を選んで深掘りする</strong>
+              <p>10案の中から「これは面白い」と思うものを3つ選び、それぞれを掘り下げます。</p>
+              <div class="prompt-card">「〇〇案について、ターゲットユーザー・提供価値・主な機能・競合との差別化を整理してください。また、このアイデアの弱点も正直に教えてください。」</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num teal">3</div>
+            <div class="step-content">
+              <strong>「えらいヒト」視点で批評させる</strong>
+              <p>3案それぞれを、予算を出す立場のヒトとして評価してもらいます。</p>
+              <div class="prompt-card">「あなたはスタートアップに投資判断をするVCです。このサービスアイデアのピッチを聞いたとして、投資したいと思いますか？理由とともに、改善すべき点を教えてください。」</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-badge proto">Step 2</span>
+        <span class="phase-title">プロトタイプを作る</span>
+      </div>
+      <div class="phase-body">
+        <div class="goal-box">
+          <span>🎯</span>
+          <span>3案それぞれに「見せられるもの」を作る。完成度より、アイデアの価値が伝わることを優先する。</span>
+        </div>
+        <ul class="steps">
+          <li>
+            <div class="step-num orange">1</div>
+            <div class="step-content">
+              <strong>デジタルサービスはHTMLかFigmaで作る</strong>
+              <p>ClaudeにHTMLを生成させて、ブラウザで動くUIを作るのが最速です。</p>
+              <div class="prompt-card orange-l">「〇〇というサービスのトップ画面（スマホアプリ想定・幅375px）をHTMLで作ってください。<br>・機能：△△<br>・デザインの雰囲気：□□<br>HTMLファイルとして作ってください。」</div>
+              <div class="tips" style="margin-top:8px;">
+                <div class="tip"><span>💡</span><span>Figmaに取り込むには html.to.design プラグインが使えます</span></div>
+                <div class="tip"><span>💡</span><span>「もっとシャープに」「余白を広く」など言葉でデザインを調整できます</span></div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num orange">2</div>
+            <div class="step-content">
+              <strong>空間・ガジェット系はビジュアルで見せる</strong>
+              <p>図面・スケッチ・3Dモデルなど、形が伝わるものを用意します。ClaudeやMidjourneyでイメージビジュアルを生成するのもOKです。</p>
+              <div class="prompt-card orange-l">「〇〇という空間サービスのコンセプトを表すビジュアルのアイデアを教えてください。また、このコンセプトを一枚の画像で伝えるとしたら、どんな構図・シーンが効果的ですか？」</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num orange">3</div>
+            <div class="step-content">
+              <strong>3案を並べて比較できる状態にする</strong>
+              <p>バラバラに作ったものを一枚のドキュメントにまとめます。</p>
+              <div class="prompt-card orange-l">「3つのサービスアイデアを比較できるA4一枚の資料を作りたいです。それぞれのコンセプト・ターゲット・提供価値・プロトタイプへのリンクをまとめたシンプルな構成を提案してください。」</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-badge verify">Step 3</span>
+        <span class="phase-title">検証する ── 誰かに触ってもらう</span>
+      </div>
+      <div class="phase-body">
+        <div class="goal-box">
+          <span>🎯</span>
+          <span>自分だけで判断しない。1人でも実際のユーザーに触ってもらい、反応を記録する。</span>
+        </div>
+        <ul class="steps">
+          <li>
+            <div class="step-num purple">1</div>
+            <div class="step-content">
+              <strong>検証の方法をAIと考える</strong>
+              <div class="prompt-card purple-l">「〇〇というサービスのプロトタイプを作りました。このサービスが価値を持つかどうかを検証するために、誰に・何を・どうやって確かめれば良いですか？短時間でできる方法を教えてください。」</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num purple">2</div>
+            <div class="step-content">
+              <strong>友人・家族・同期に触ってもらう</strong>
+              <p>「どこで迷った？」「続けて使いたいと思う？」など、感想を一言でも聞いておきます。</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num purple">3</div>
+            <div class="step-content">
+              <strong>検証結果を提出資料に一言添える</strong>
+              <p>「〇〇に見せたところ△△という反応だった」だけでOKです。試みたという記録が大事です。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 4 提出 -->
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-badge submit">提出</span>
+        <span class="phase-title">まとめて提出する</span>
+      </div>
+      <div class="phase-body">
+        <div class="submit-box">
+          <h3>提出物チェックリスト　締切：6/24（水）12:00</h3>
+          <ul class="submit-items">
+            <li><span class="check-box"></span><span>サービスデザイン案 最低3つ（コンセプト・ターゲット・提供価値を各案で説明できること）</span></li>
+            <li><span class="check-box"></span><span>各案のプロトタイプ（HTML・FigmaURL・モックアップ画像など形式不問）</span></li>
+            <li><span class="check-box"></span><span>検証の記録（誰に見せたか・どんな反応だったか。一言でOK）</span></li>
+            <li><span class="check-box"></span><span>まとめ資料（PDFでも・HTMLでも・Figmaでも可）</span></li>
+          </ul>
+          <p style="font-size:13px;color:var(--ink-mid);margin-top:14px;line-height:1.7;">完成度は問いません。「えらいヒトに見せて、予算を出したいと思わせられるか」という視点で資料を整えてください。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AIを使うときのヒント ── -->
+  <div class="section">
+    <div class="section-label"><span class="dot"></span>AIをうまく使うコツ</div>
+    <div class="help-grid">
+      <div class="help-card">
+        <div class="q">アイデアがぼんやりしている</div>
+        <div class="a">「私は〇〇専攻のデザイン学生です」という前置きを入れると、専門性に合わせた提案が返ってきます。</div>
+      </div>
+      <div class="help-card">
+        <div class="q">HTMLが崩れた・イメージと違う</div>
+        <div class="a">「最初からやり直してください。今度は〇〇の雰囲気で、△△に気をつけて」とリセットするプロンプトを送りましょう。</div>
+      </div>
+      <div class="help-card">
+        <div class="q">3案の違いが出ない</div>
+        <div class="a">「この3案をもっと方向性が異なるものに組み替えてください。それぞれ全く異なる価値観・ユーザー層にしてください」と頼んでみましょう。</div>
+      </div>
+      <div class="help-card">
+        <div class="q">どれを推せばいいかわからない</div>
+        <div class="a">「この3案のうち、講評会で最も印象に残りそうなのはどれですか？理由も教えてください」と聞いてみましょう。</div>
+      </div>
+      <div class="help-card">
+        <div class="q">資料のまとめ方がわからない</div>
+        <div class="a">「予算を出すか検討するVCに見せる、5スライドのピッチ資料の構成を提案してください」と頼むと、説得力のある構成が出てきます。</div>
+      </div>
+      <div class="help-card">
+        <div class="q">プロトタイプが「それっぽく」見えない</div>
+        <div class="a">「このデザインをもっとプロのアプリらしく整えてください。フォント・余白・カラーパレットを統一してください」と指示しましょう。</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container" style="padding-top:0;padding-bottom:0;">
+    このガイドは授業中の参照用です。詳細は授業内の説明を優先してください。
+  </div>
+</footer>
+
+</body>
+</html>
